@@ -4,7 +4,9 @@ import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import Home from './components/home';
+// import Home from './components/Home';
+// import Home from './components/Home';
+import Hero from './components/Hero';
 import Navbar from './components/Navbar';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -22,7 +24,7 @@ const App = () => {
     <div className="bg-black text-white font-sans">
 
      <Navbar />
-      <Home />
+      <Hero />
       <About />
       <Projects />
       <Contact />
