@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
+import { personalInfo } from '../data/portfolioData';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -16,10 +17,10 @@ const Contact = () => {
   };
 
   const validateForm = () => {
+    const isDarkMode = document.documentElement.classList.contains('dark');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.name.trim()) return false;
     if (!formData.email.trim() || !emailRegex.test(formData.email)) return false;
-    if (!formData.subject.trim()) return false;
     if (!formData.message.trim()) return false;
     return true;
   };
@@ -32,7 +33,9 @@ const Contact = () => {
         icon: 'error',
         title: 'Invalid Input',
         text: 'Please fill out all fields correctly.',
-        confirmButtonColor: '#2563eb',
+        background: '#0a0a0a',
+        color: '#fff',
+        confirmButtonColor: '#cac6f9',
       });
       return;
     }
@@ -42,16 +45,19 @@ const Contact = () => {
     try {
       const response = await fetch('https://formspree.io/f/xdklqkde', {
         method: 'POST',
-        body: new FormData(e.target),
-        headers: { 'Accept': 'application/json' },
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
 
+      const isDarkMode = document.documentElement.classList.contains('dark');
       if (response.ok) {
         Swal.fire({
           icon: 'success',
           title: 'Message Sent!',
           text: 'Thank you for your message. I’ll get back to you soon!',
-          confirmButtonColor: '#2563eb',
+          background: '#0a0a0a',
+          color: '#fff',
+          confirmButtonColor: '#cac6f9',
         });
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
@@ -62,7 +68,9 @@ const Contact = () => {
         icon: 'error',
         title: 'Oops...',
         text: 'Something went wrong. Please try again or email me directly.',
-        confirmButtonColor: '#2563eb',
+        background: '#0a0a0a',
+        color: '#fff',
+        confirmButtonColor: '#cac6f9',
       });
     } finally {
       setIsSending(false);
@@ -70,77 +78,92 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-900 px-6">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6" data-aos="fade-up">
-          Get In Touch
-        </h2>
-        <p className="text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="200">
-          Interested in working together? Drop me a message below 👇
-        </p> 
+    <section id="contact" className="py-24 px-6 relative transition-colors duration-300">
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary-lavender/5 blur-[120px] rounded-full pointer-events-none" />
 
-        {/* Download Resume Button */}
-        <div className="mb-8">
-        <a
-            href="/resume.pdf" // <-- make sure your resume is in the public folder
-            download
-            className="inline-block px-6 py-3 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition"
-        >
-            Download Resume
-        </a>
-    </div>
-        <form 
-          className="space-y-4" 
-          data-aos="fade-up" 
-          data-aos-delay="400"
-          onSubmit={handleSubmit}
-        >
-          <input 
-            type="text" 
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Your Name" 
-            className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input 
-            type="email" 
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Your Email" 
-            className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input 
-            type="text"
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            placeholder="Subject" 
-            className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <textarea 
-            name="message"
-            rows="5"
-            value={formData.message}
-            onChange={handleChange}
-            placeholder="Your Message" 
-            className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
-          <button 
-            type="submit" 
-            disabled={isSending}
-            className={`px-6 py-3 rounded-lg shadow-md text-white transition ${
-              isSending ? 'bg-gray-600 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
-            }`}
-          >
-            {isSending ? 'Sending...' : 'Send Message'}
-          </button>
-        </form>
-        <p className="text-gray-400 mt-6 text-center">
-          Or email me directly at: 
-          <a href="mailto:emmanuelojo291@gmail.com" className="text-blue-500 hover:underline"> emmanuelojo291@gmail.com</a>
-        </p>
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16">
+
+          <div data-aos="fade-right" className="space-y-12">
+            <div className="space-y-6">
+              <span className="text-primary-gold font-bold tracking-[0.2em] uppercase text-xs">Contact</span>
+              <h2 className="text-4xl sm:text-6xl font-black text-white leading-tight">
+                Let’s Build <br />Something Great.
+              </h2>
+              <p className="text-gray-400 text-lg leading-relaxed font-light max-w-md">
+                Have a project in mind or just want to say hi? I'm always open to discussing new opportunities and challenges.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <div className="group">
+                <p className="text-[10px] font-black uppercase tracking-widest text-gray-500 group-hover:text-primary-lavender transition-colors">Email Me</p>
+                <a href={`mailto:${personalInfo.email}`} className="text-xl sm:text-2xl font-black text-white hover:text-primary-lavender transition-colors">{personalInfo.email}</a>
+              </div>
+
+              <div className="flex gap-6 pt-4">
+                {personalInfo.socials.map((social, i) => (
+                  <a key={i} href={social.link} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-xl text-gray-400 hover:bg-white hover:text-black hover:border-white transition-all duration-300">
+                    <social.icon />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Form */}
+          <div data-aos="fade-left" className="glass p-8 sm:p-12 rounded-[2.5rem] relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary-gold/10 blur-3xl" />
+
+            <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+              <div className="grid sm:grid-cols-2 gap-8">
+                <div className="space-y-2 group">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 group-focus-within:text-primary-gold transition-colors">Full Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-primary-gold transition-colors placeholder:text-gray-700"
+                    placeholder="John Doe"
+                  />
+                </div>
+                <div className="space-y-2 group">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 group-focus-within:text-primary-gold transition-colors">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-primary-gold transition-colors placeholder:text-gray-700"
+                    placeholder="john@example.com"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2 group">
+                <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 group-focus-within:text-primary-gold transition-colors">Your Message</label>
+                <textarea
+                  name="message"
+                  rows="4"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-primary-gold transition-colors placeholder:text-gray-700 resize-none"
+                  placeholder="How can I help you?"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSending}
+                className="w-full py-5 bg-primary-gold text-black rounded-2xl font-black uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-glow-gold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSending ? 'Sending Mission...' : 'Send Message'}
+              </button>
+            </form>
+          </div>
+
+        </div>
       </div>
     </section>
   );

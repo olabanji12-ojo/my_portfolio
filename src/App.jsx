@@ -17,13 +17,13 @@ import ProjectCard from './components/ProjectCard';
 const App = () => {
 
   useEffect(() => {
-    AOS.init({ duration: 1000, once: false });
+    AOS.init({ duration: 1000, once: true });
   }, []);
-  
-  return (
-    <div className="bg-black text-white font-sans">
 
-     <Navbar />
+  return (
+    <div className="font-sans">
+
+      <Navbar />
       <Hero />
       <About />
       <Projects />

@@ -1,46 +1,52 @@
-import React from 'react'
-import ProjectCard from './ProjectCard'
+import React, { useState } from 'react';
+import ProjectCard from './ProjectCard';
+import { projects } from '../data/portfolioData';
 
 const Projects = () => {
-    const projectData = [
-        {
-          title: "Foam Up",
-          desc: "A comprehensive car wash management platform that bridges the gap between car owners and car wash businesses. Features interactive maps, smart booking, real-time tracking, and secure payments. Built with React, Tailwind CSS, Go, and MongoDB.",
-          img: "/Detailed design of bike logo template _ Free Vector.jpeg",
-          link1: "https://foam-up.vercel.app/",
-          link2: "https://github.com/olabanji12-ojo/foam-up",
-          
-        },
-        {
-          title: "Job Board",
-          desc: "A Django-powered job portal connecting employers and job seekers. Employers can post jobs while job seekers can browse, search, and apply. Features role-based authentication, job search functionality, pagination, and partial page updates with HTMX.",
-          img: "/job_board.png",
-          link1: "",
-          link2: "https://github.com/olabanji12-ojo/job-board"
-        },
+  const categories = ["All", ...new Set(projects.map(p => p.category))];
+  const [activeCategory, setActiveCategory] = useState("All");
 
-        {
-          title: "Blog Platform",
-          desc: "An interactive chatbot built with Django and integrated with the Gemma:2B language model via API. Features real-time streaming responses, user input processing, and seamless conversation flow. Perfect for customer support and AI assistance applications.",
-          img: "/ai_chatbot.png",
-          link1: "", 
-          link2: "https://github.com/olabanji12-ojo/Chatbot_Project"  
-        },
-      ];
+  const filteredProjects = activeCategory === "All"
+    ? projects
+    : projects.filter(p => p.category === activeCategory);
+
   return (
-    <section id="projects" className="py-20 px-6 bg-black">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10" data-aos="fade-up">
-          Projects
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {projectData.map((project, i) => (
-            <ProjectCard key={i} {...project} />
+    <section id="projects" className="py-24 px-6 relative transition-colors duration-300">
+      <div className="max-w-6xl mx-auto z-10 relative">
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
+          <div data-aos="fade-right" className="space-y-4">
+            <span className="text-primary-gold font-bold tracking-[0.2em] uppercase text-xs">Portfolio</span>
+            <h2 className="text-4xl sm:text-6xl font-black text-white leading-tight">
+              Featured <br />Projects.
+            </h2>
+          </div>
+
+          <div data-aos="fade-left" className="flex flex-wrap gap-3">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all ${activeCategory === cat
+                    ? "bg-primary-lavender text-black shadow-glow"
+                    : "bg-white/5 text-gray-400 hover:bg-white/10"
+                  }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
+          {filteredProjects.map((project, i) => (
+            <div key={project.title} data-aos="fade-up" data-aos-delay={i * 100}>
+              <ProjectCard {...project} />
+            </div>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Projects
+export default Projects;
