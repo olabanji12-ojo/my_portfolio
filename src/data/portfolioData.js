@@ -38,7 +38,7 @@ export const projects = [
   {
     title: "Queueless",
     category: "Full Stack",
-    tech: ["React", "Express", "Node.js", "PostgreSQL", "Tailwind CSS"],
+    tech: ["React", "TypeScript", "React Router", "Go", "MongoDB", "Tailwind CSS"],
     desc: "An innovative carwash booking and management platform that eliminates wait times. Features include slot booking, worker assignment, and a robust admin dashboard.",
     img: ["/carwash1.png", "/carwash2.png", "/carwash3.png"],
     links: {
