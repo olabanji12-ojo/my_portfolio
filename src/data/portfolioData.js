@@ -1,7 +1,7 @@
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 export const personalInfo = {
-  name: "Emmanuel Ojo",
+  name: "Olabanji Ojo",
   title: "Full Stack Engineer & Teacher",
   mission: "Passionate about solving complex problems through logical reasoning and building scalable digital experiences that matter.",
   bio: "I am a final year Computer Science student at Osun State University with a deep-rooted passion for tutoring and problem-solving. My journey began with a curiosity for how things work, leading me from the basics of the web to building complex backend architectures. I believe that whatever we do, we owe it to ourselves and the world to do it well.",
