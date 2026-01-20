@@ -60,7 +60,7 @@ export const projects = [
   {
     title: "Automation & Integration",
     category: "Automation",
-    tech: ["Make.com", "Zapier", "OpenAI", "Webhooks"],
+    tech: ["Make.com", "Webhooks"],
     desc: "Streamlining business workflows with complex Make.com scenarios. Integrated AI for automated responses and data processing.",
     img: ["/autimation.png"],
     links: {
@@ -70,11 +70,11 @@ export const projects = [
   {
     title: "Job Board",
     category: "Full Stack",
-    tech: ["React", "Node.js", "Express", "MongoDB", "Bootstrap"],
+    tech: ["Python", "Django", "HTMX", "Sqlite", "Bootstrap", "Signals"],
     desc: "A platform connecting talent with opportunities. Features advanced job filtering, application tracking, and recruiter dashboards.",
     img: ["/job_board.png"],
     links: {
-      github: "https://github.com/olabanji12-ojo/Full-stack-job-board-app-with-React-Express",
+      github: "https://github.com/olabanji12-ojo/Job-Board",
       live: "#"
     }
   }
