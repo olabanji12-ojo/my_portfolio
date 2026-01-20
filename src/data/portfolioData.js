@@ -42,7 +42,7 @@ export const projects = [
     desc: "An innovative carwash booking and management platform that eliminates wait times. Features include slot booking, worker assignment, and a robust admin dashboard.",
     img: ["/carwash1.png", "/carwash2.png", "/carwash3.png"],
     links: {
-      github: "https://github.com/olabanji12-ojo/Banji_Amoo-banji_carwash",
+      github: "https://github.com/olabanji12-ojo/Car_Wash_Frontend",
       live: "http://queueless.online/"
     }
   },
@@ -53,7 +53,7 @@ export const projects = [
     desc: "A premium e-commerce experience with seamless Paystack integration, real-time inventory tracking, and a sleek modern interface.",
     img: ["/bomffa1.png", "/bomffa2.png"],
     links: {
-      github: "https://github.com/olabanji12-ojo/Bommfa",
+      github: "https://github.com/olabanji12-ojo/ob-s-project",
       live: "https://bomffa.store/"
     }
   },
